@@ -31,6 +31,10 @@ fs
     db[model.name] = model;
   });
 
+// THÊM MODEL TEACHER THEO CÁCH TƯƠNG TỰ
+const Teacher = require('./teacher')(sequelize, Sequelize.DataTypes);
+db[Teacher.name] = Teacher;
+
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
     db[modelName].associate(db);

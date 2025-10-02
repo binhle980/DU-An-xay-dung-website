@@ -1,19 +1,19 @@
-import express from "express";
-import bodyParser from "body-parser";
-import viewEngine from "./config/viewEngine";
-import initWebRoutes from "./route/web";
+const express = require("express");
+const bodyParser = require("body-parser");
+const viewEngine = require("./config/viewEngine");
+const initWebRoutes = require("./route/web"); // SỬA THÀNH './route/web'
+const initTeacherRoutes = require("./route/teacher"); // SỬA THÀNH './route/teacher'
+const cors = require("cors");
 
 let app = express();
+app.use(cors({ origin: true }));
 
-// cấu hình body-parser để đọc dữ liệu từ form và JSON
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// cấu hình view engine (EJS)
 viewEngine(app);
-
-// cấu hình routes
 initWebRoutes(app);
+initTeacherRoutes(app);
 
 let port = process.env.PORT || 8080;
 app.listen(port, () => {
